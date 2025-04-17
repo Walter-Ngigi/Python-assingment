@@ -1,0 +1,41 @@
+def process_file():
+  
+    input_filename = input("Enter the name of the file to read: ")
+    
+    try:
+        
+        with open(input_filename, 'r') as input_file:
+            content = input_file.read()
+            print(f"Successfully read file: {input_filename}")
+            print(f"Original content length: {len(content)} characters")
+            
+            
+            modified_content = content.upper()
+            
+            
+            output_filename = "modified_" + input_filename
+            
+          
+            try:
+                with open(output_filename, 'w') as output_file:
+                    output_file.write(modified_content)
+                    print(f"Successfully wrote modified content to: {output_filename}")
+            except IOError as e:
+                print(f"Error writing to output file: {e}")
+                
+    except FileNotFoundError:
+        print(f"Error: The file '{input_filename}' was not found.")
+    except PermissionError:
+        print(f"Error: You don't have permission to access '{input_filename}'.")
+    except IOError as e:
+        print(f"Error reading the file: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+    finally:
+        print("File processing operation completed.")
+
+if __name__ == "__main__":
+    print("File Read & Write Challenge with Error Handling")
+    print("----------------------------------------------")
+    print("This program will read a file, modify its content, and save it to a new file.")
+    process_file()
