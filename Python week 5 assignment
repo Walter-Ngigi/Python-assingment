@@ -1,0 +1,171 @@
+# Assignment 1: Design Your Own Class - Book Library System
+
+class Book:
+    """A simple class representing a book."""
+    
+    def __init__(self, title, author, pages):
+        """Initialize a book with basic information."""
+        self.title = title
+        self.author = author
+        self.pages = pages
+        self.is_checked_out = False
+    
+    def check_out(self):
+        """Check out this book if available."""
+        if not self.is_checked_out:
+            self.is_checked_out = True
+            return f"{self.title} has been checked out."
+        else:
+            return f"{self.title} is already checked out."
+    
+    def return_book(self):
+        """Return this book to the library."""
+        if self.is_checked_out:
+            self.is_checked_out = False
+            return f"{self.title} has been returned."
+        else:
+            return f"{self.title} was not checked out."
+    
+    def get_info(self):
+        """Get information about this book."""
+        status = "Checked out" if self.is_checked_out else "Available"
+        return f"'{self.title}' by {self.author}, {self.pages} pages, Status: {status}"
+
+
+class Textbook(Book):
+    """A textbook with a subject."""
+    
+    def __init__(self, title, author, pages, subject):
+        """Initialize a textbook with subject."""
+        super().__init__(title, author, pages)
+        self.subject = subject
+    
+    def get_info(self):
+        """Override to include subject information."""
+        basic_info = super().get_info()
+        return f"{basic_info}, Subject: {self.subject}"
+
+
+class Novel(Book):
+    """A novel with a genre."""
+    
+    def __init__(self, title, author, pages, genre):
+        """Initialize a novel with genre."""
+        super().__init__(title, author, pages)
+        self.genre = genre
+    
+    def get_info(self):
+        """Override to include genre information."""
+        basic_info = super().get_info()
+        return f"{basic_info}, Genre: {self.genre}"
+
+
+# Activity 2: Polymorphism Challenge with Animals
+
+class Animal:
+    """Base class for animals."""
+    
+    def __init__(self, name, age):
+        """Initialize an animal with name and age."""
+        self.name = name
+        self.age = age
+    
+    def make_sound(self):
+        """Generic animal sound method."""
+        return "Some animal sound"
+    
+    def describe(self):
+        """Describe the animal."""
+        return f"{self.name} is {self.age} years old"
+
+
+class Dog(Animal):
+    """A dog that barks."""
+    
+    def make_sound(self):
+        """Dogs bark."""
+        return "Woof!"
+    
+    def describe(self):
+        """Describe the dog."""
+        return f"{self.name} is a dog and is {self.age} years old"
+
+
+class Cat(Animal):
+    """A cat that meows."""
+    
+    def make_sound(self):
+        """Cats meow."""
+        return "Meow!"
+    
+    def describe(self):
+        """Describe the cat."""
+        return f"{self.name} is a cat and is {self.age} years old"
+
+
+class Duck(Animal):
+    """A duck that quacks."""
+    
+    def make_sound(self):
+        """Ducks quack."""
+        return "Quack!"
+    
+    def describe(self):
+        """Describe the duck."""
+        return f"{self.name} is a duck and is {self.age} years old"
+
+
+# Demonstration
+
+def test_books():
+    """Test the book classes."""
+    print("=== BOOK LIBRARY SYSTEM ===")
+    
+    # Create a regular book
+    book = Book("The Hobbit", "J.R.R. Tolkien", 295)
+    print(book.get_info())
+    print(book.check_out())
+    print(book.get_info())
+    print(book.return_book())
+    
+    # Create a textbook
+    textbook = Textbook("Python Programming", "John Smith", 500, "Computer Science")
+    print("\n" + textbook.get_info())
+    print(textbook.check_out())
+    
+    # Create a novel
+    novel = Novel("Pride and Prejudice", "Jane Austen", 432, "Classic Romance")
+    print("\n" + novel.get_info())
+    print(novel.check_out())
+
+
+def test_animals():
+    """Test the animal polymorphism."""
+    print("\n=== ANIMAL SOUNDS ===")
+    
+    # Create some animals
+    animals = [
+        Dog("Buddy", 3),
+        Cat("Whiskers", 2),
+        Duck("Donald", 1)
+    ]
+    
+    # Demonstrate polymorphism - same method name, different behaviors
+    for animal in animals:
+        print(f"\n{animal.describe()}")
+        print(f"{animal.name} says: {animal.make_sound()}")
+
+
+if __name__ == "__main__":
+    # Run both demonstrations
+    test_books()
+    test_animals()
+
+
+
+
+
+
+
+
+
